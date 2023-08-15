@@ -11,7 +11,6 @@
  ***************************************************************************/
 package games.stendhal.server.core.rp;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -24,8 +23,47 @@ import games.stendhal.server.core.events.TurnNotifier;
 import games.stendhal.server.entity.npc.quest.BuiltQuest;
 import games.stendhal.server.entity.npc.quest.QuestManuscript;
 import games.stendhal.server.entity.player.Player;
-import games.stendhal.server.maps.quests.*;
-import games.stendhal.server.maps.quests.antivenom_ring.AntivenomRing;
+import games.stendhal.server.maps.quests.ArmorForDagobert;
+import games.stendhal.server.maps.quests.BeerForHayunn;
+import games.stendhal.server.maps.quests.BowsForOuchit;
+import games.stendhal.server.maps.quests.CleanStorageSpace;
+import games.stendhal.server.maps.quests.DailyMonsterQuest;
+import games.stendhal.server.maps.quests.EasterGiftsForChildren;
+import games.stendhal.server.maps.quests.GoodiesForRudolph;
+import games.stendhal.server.maps.quests.HatForMonogenes;
+import games.stendhal.server.maps.quests.HelpMrsYeti;
+import games.stendhal.server.maps.quests.HerbsForCarmen;
+import games.stendhal.server.maps.quests.HungryJoshua;
+import games.stendhal.server.maps.quests.IQuest;
+import games.stendhal.server.maps.quests.JailedDwarf;
+import games.stendhal.server.maps.quests.KanmararnSoldiers;
+import games.stendhal.server.maps.quests.KillEnemyArmy;
+import games.stendhal.server.maps.quests.KillGnomes;
+import games.stendhal.server.maps.quests.KoboldishTorcibud;
+import games.stendhal.server.maps.quests.LearnAboutOrbs;
+import games.stendhal.server.maps.quests.LookBookforCeryl;
+import games.stendhal.server.maps.quests.McPeglegIOU;
+import games.stendhal.server.maps.quests.MedicineForTad;
+import games.stendhal.server.maps.quests.MeetHackim;
+import games.stendhal.server.maps.quests.MeetHayunn;
+import games.stendhal.server.maps.quests.MeetIo;
+import games.stendhal.server.maps.quests.MeetKetteh;
+import games.stendhal.server.maps.quests.MeetMonogenes;
+import games.stendhal.server.maps.quests.MineTownRevivalWeeks;
+import games.stendhal.server.maps.quests.MineTownRevivalWeeksConstruction;
+import games.stendhal.server.maps.quests.NewsFromHackim;
+import games.stendhal.server.maps.quests.ObsidianKnife;
+import games.stendhal.server.maps.quests.PaperChase;
+import games.stendhal.server.maps.quests.PizzaDelivery;
+import games.stendhal.server.maps.quests.PlinksToy;
+import games.stendhal.server.maps.quests.QuestInfo;
+import games.stendhal.server.maps.quests.RainbowBeans;
+import games.stendhal.server.maps.quests.ReverseArrow;
+import games.stendhal.server.maps.quests.SheepGrowing;
+import games.stendhal.server.maps.quests.Snowballs;
+import games.stendhal.server.maps.quests.SuppliesForPhalk;
+import games.stendhal.server.maps.quests.VampireSword;
+import games.stendhal.server.maps.quests.ZekielsPracticalTestQuest;
 
 /**
  * Loads and manages all quests.
@@ -42,7 +80,6 @@ public class StendhalQuestSystem {
 
 	private final static List<IQuest> cached = new ArrayList<>();
 	private static boolean cacheLoaded = false;
-
 
 	/**
 	 * gets the singleton instance of the StendhalQuestSystem
@@ -69,7 +106,7 @@ public class StendhalQuestSystem {
 	 * @param player
 	 */
 	public static void updatePlayerQuests(Player player) {
-		for(int i=0; i<quests.size(); i++) {
+		for (int i = 0; i < quests.size(); i++) {
 			quests.get(i).updatePlayer(player);
 		}
 	}
@@ -78,124 +115,135 @@ public class StendhalQuestSystem {
 	 * Initializes the QuestSystem.
 	 */
 	public void init() {
-		loadQuest(new AGrandfathersWish());
-		//deactivated AdMemoriaInPortfolio
-		//loadQuest(new AdMemoriaInPortfolio());
-		loadQuest(new AdosDeathmatch());
-		loadQuest(new AdventureIsland());
-		loadQuest(new AmazonPrincess());
-		loadQuest(new AntivenomRing());
-		loadQuest(new ArmorForDagobert());
-		loadQuest(new BalloonForBobby());
-		loadQuest(new BeerForHayunn());
-		loadQuest(new Blackjack());
-		loadQuest(new BowsForOuchit());
-		loadQuest(new Campfire());
-		// deactivated capture the flag
-		//loadQuest(new CaptureFlagQuest());
-		loadQuest(new ChocolateForElisabeth());
-		loadQuest(new CleanAthorsUnderground());
-		loadQuest(new CleanStorageSpace());
-		loadQuest(new CloakCollector());
-		loadQuest(new CloakCollector2());
-		loadQuest(new CloaksForBario());
-		loadQuest(new ClubOfThorns());
-		loadQuest(new CoalForHaunchy());
-		loadQuest(new CodedMessageFromFinnFarmer());
-		loadQuest(new CollectEnemyData());
-		loadQuest(new CrownForTheWannaBeKing());
-		loadQuest(new DailyItemQuest());
-		loadQuest(new DailyMonsterQuest());
-		loadQuest(new DiceGambling());
-		loadQuest(new DragonLair());
-		loadQuest(new EggsForMarianne());
-		loadQuest(new ElfPrincess());
-		loadQuest(new ElvishArmor());
-		loadQuest(new EmotionCrystals());
-		loadQuest(new FindGhosts());
-		loadQuest(new FindJefsMom());
-		loadQuest(new FindRatChildren());
-		loadQuest(new FishermansLicenseQuiz());
-		loadQuest(new FishermansLicenseCollector());
-		loadQuest(new FishSoup());
-		loadQuest(new FishSoupForHughie());
-		loadQuest(new FruitsForCoralia());
-		loadQuest(new GuessKills());
-		loadQuest(new HatForMonogenes());
-		loadQuest(new HelpTomi());
-		loadQuest(new HelpMrsYeti());
-		loadQuest(new HelpWithTheHarvest());
-		loadQuest(new HerbsForCarmen());
-		loadQuest(new HouseBuying());
-		loadQuest(new HungryJoshua());
-		loadQuest(new IcecreamForAnnie());
-		loadQuest(new ImperialPrincess());
-		loadQuest(new JailedBarbarian());
+
+		// Semos Quests
+		loadQuest(new KanmararnSoldiers());
 		loadQuest(new JailedDwarf());
-		loadQuest(new LearnAboutKarma());
+		loadQuest(new VampireSword());
+		loadQuest(new ArmorForDagobert());
+		loadQuest(new BeerForHayunn());
+		loadQuest(new BowsForOuchit());
+		loadQuest(new CleanStorageSpace());
+		loadQuest(new DailyMonsterQuest());
+		loadQuest(new HatForMonogenes());
+		loadQuest(new HerbsForCarmen());
+		loadQuest(new HungryJoshua());
+		loadQuest(new McPeglegIOU());
+		loadQuest(new KillGnomes());
 		loadQuest(new LearnAboutOrbs());
 		loadQuest(new LookBookforCeryl());
-		loadQuest(new LookUpQuote());
-		loadQuest(new KanmararnSoldiers());
-		loadQuest(new KillBlordroughs());
-		loadQuest(new KillDarkElves());
-		loadQuest(new KillDhohrNuggetcutter());
-		loadQuest(new KillEnemyArmy());
-		loadQuest(new KillGnomes());
-		loadQuest(new KillMonks());
-		loadQuest(new KillSpiders());
-		loadQuest(new KoboldishTorcibud());
-		loadQuest(new Marriage());
-		loadQuest(new Maze());
-		loadQuest(new McPeglegIOU());
-		loadQuest(new MealForGroongo());
-		loadQuest(new MeetBunny());
 		loadQuest(new MedicineForTad());
 		loadQuest(new MeetHackim());
 		loadQuest(new MeetHayunn());
+		loadQuest(new MeetMonogenes());
 		loadQuest(new MeetIo());
 		loadQuest(new MeetKetteh());
-		loadQuest(new MeetMarieHenri());
-		loadQuest(new MeetMonogenes());
-		loadQuest(new MeetSanta());
-		loadQuest(new MeetZynn());
-		loadQuest(new MithrilCloak());
-		loadQuest(new MixtureForOrtiv());
-		loadQuest(new MuseumEntranceFee());
 		loadQuest(new NewsFromHackim());
-		loadQuest(new ObsidianKnife());
 		loadQuest(new PizzaDelivery());
 		loadQuest(new PlinksToy());
 		loadQuest(new RainbowBeans());
-		loadQuest(new RestockFlowerShop());
 		loadQuest(new ReverseArrow());
-		loadQuest(new RingMaker());
-		loadQuest(new SadScientist());
-		loadQuest(new ScubaLicenseQuiz());
 		loadQuest(new SheepGrowing());
-		loadQuest(new SolveRiddles());
-		loadQuest(new SevenCherubs());
-		loadQuest(new Snowballs());
-		loadQuest(new Soup());
-		loadQuest(new StuffForBaldemar());
-		loadQuest(new StuffForVulcanus());
-		loadQuest(new SuntanCreamForZara());
+
+		// Semos Mine
 		loadQuest(new SuppliesForPhalk());
-		loadQuest(new TakeGoldforGrafindle());
-		loadQuest(new ThePiedPiper());
-		loadQuest(new ToysCollector());
-		loadQuest(new TrapsForKlaas());
-		//loadQuest(new TutorialIsland());
-		loadQuest(new UltimateCollector());
-		loadQuest(new UnicornHornsForZelan());
-		loadQuest(new VampireSword());
-		loadQuest(new WaterForXhiphin());
-		loadQuest(new WeaponsCollector());
-		loadQuest(new WeaponsCollector2());
-		loadQuest(new WeeklyItemQuest());
-		loadQuest(new WizardBank());
+		loadQuest(new KillEnemyArmy());
+
+		// Semos Mountain
 		loadQuest(new ZekielsPracticalTestQuest());
-		loadQuest(new ZooFood());
+
+		// Semos Yeti Cave
+		loadQuest(new HelpMrsYeti());
+		loadQuest(new Snowballs());
+
+		// Wofol
+		loadQuest(new KoboldishTorcibud());
+		loadQuest(new ObsidianKnife());
+
+		// loadQuest(new AGrandfathersWish());
+		// // deactivated AdMemoriaInPortfolio
+		// loadQuest(new AdMemoriaInPortfolio());
+		// loadQuest(new AdosDeathmatch());
+		// loadQuest(new AdventureIsland());
+		// loadQuest(new AmazonPrincess());
+		// loadQuest(new AntivenomRing());
+		// loadQuest(new BalloonForBobby());
+		// loadQuest(new Blackjack());
+		// loadQuest(new Campfire());
+		// // deactivated capture the flag
+		// loadQuest(new CaptureFlagQuest());
+		// loadQuest(new ChocolateForElisabeth());
+		// loadQuest(new CleanAthorsUnderground());
+		// loadQuest(new CloakCollector());
+		// loadQuest(new CloakCollector2());
+		// loadQuest(new CloaksForBario());
+		// loadQuest(new ClubOfThorns());
+		// loadQuest(new CoalForHaunchy());
+		// loadQuest(new CodedMessageFromFinnFarmer());
+		// loadQuest(new CollectEnemyData());
+		// loadQuest(new CrownForTheWannaBeKing());
+		// loadQuest(new DailyItemQuest());
+		// loadQuest(new DiceGambling());
+		// loadQuest(new DragonLair());
+		// loadQuest(new EggsForMarianne());
+		// loadQuest(new ElfPrincess());
+		// loadQuest(new ElvishArmor());
+		// loadQuest(new EmotionCrystals());
+		// loadQuest(new FindGhosts());
+		// loadQuest(new FindJefsMom());
+		// loadQuest(new FindRatChildren());
+		// loadQuest(new FishermansLicenseQuiz());
+		// loadQuest(new FishermansLicenseCollector());
+		// loadQuest(new FishSoup());
+		// loadQuest(new FishSoupForHughie());
+		// loadQuest(new FruitsForCoralia());
+		// loadQuest(new GuessKills());
+		// loadQuest(new HelpTomi());
+		// loadQuest(new HelpWithTheHarvest());
+		// loadQuest(new HouseBuying());
+		// loadQuest(new IcecreamForAnnie());
+		// loadQuest(new ImperialPrincess());
+		// loadQuest(new JailedBarbarian());
+		// loadQuest(new LearnAboutKarma());
+		// loadQuest(new LookUpQuote());
+		// loadQuest(new KillBlordroughs());
+		// loadQuest(new KillDarkElves());
+		// loadQuest(new KillDhohrNuggetcutter());
+		// loadQuest(new KillMonks());
+		// loadQuest(new KillSpiders());
+		// loadQuest(new Marriage());
+		// loadQuest(new Maze());
+		// loadQuest(new MealForGroongo());
+		// loadQuest(new MeetBunny());
+		// loadQuest(new MeetMarieHenri());
+		// loadQuest(new MeetSanta());
+		// loadQuest(new MeetZynn());
+		// loadQuest(new MithrilCloak());
+		// loadQuest(new MixtureForOrtiv());
+		// loadQuest(new MuseumEntranceFee());
+		// loadQuest(new RestockFlowerShop());
+		// loadQuest(new RingMaker());
+		// loadQuest(new SadScientist());
+		// loadQuest(new ScubaLicenseQuiz());
+		// loadQuest(new SolveRiddles());
+		// loadQuest(new SevenCherubs());
+		// loadQuest(new Soup());
+		// loadQuest(new StuffForBaldemar());
+		// loadQuest(new StuffForVulcanus());
+		// loadQuest(new SuntanCreamForZara());
+		// loadQuest(new TakeGoldforGrafindle());
+		// loadQuest(new ThePiedPiper());
+		// loadQuest(new ToysCollector());
+		// loadQuest(new TrapsForKlaas());
+		// //loadQuest(new TutorialIsland());
+		// loadQuest(new UltimateCollector());
+		// loadQuest(new UnicornHornsForZelan());
+		// loadQuest(new WaterForXhiphin());
+		// loadQuest(new WeaponsCollector());
+		// loadQuest(new WeaponsCollector2());
+		// loadQuest(new WeeklyItemQuest());
+		// loadQuest(new WizardBank());
+		// loadQuest(new ZooFood());
 
 		if (Occasion.CHRISTMAS) {
 			loadQuest(new GoodiesForRudolph());
@@ -265,12 +313,12 @@ public class StendhalQuestSystem {
 	 * `IQuest.removeFromWorld`.
 	 *
 	 * @param slots
-	 *     Slot identifiers of quests to reload.
+	 *              Slot identifiers of quests to reload.
 	 * @return
-	 *     <code>true</code> if quests reloaded successfully.
+	 *         <code>true</code> if quests reloaded successfully.
 	 */
 	public void reloadQuestSlots(final String... slots) {
-		for (final String slot: slots) {
+		for (final String slot : slots) {
 			if (!isLoadedSlot(slot)) {
 				continue;
 			}
@@ -286,7 +334,7 @@ public class StendhalQuestSystem {
 	 * Caches a quest for loading later.
 	 *
 	 * @param quest
-	 * 		Quest to be cached.
+	 *              Quest to be cached.
 	 */
 	public void cacheQuest(final IQuest quest) {
 		// don't cache quests if server has already been initialized
@@ -312,7 +360,7 @@ public class StendhalQuestSystem {
 	 * Loads all quests stored in the cache.
 	 */
 	public void loadCachedQuests() {
-		for (final IQuest quest: cached) {
+		for (final IQuest quest : cached) {
 			loadQuest(quest);
 		}
 
@@ -323,8 +371,8 @@ public class StendhalQuestSystem {
 
 	/**
 	 *
-	 * @param sb - string builder of mother function
-	 * @param quest - show this quest to payer
+	 * @param sb     - string builder of mother function
+	 * @param quest  - show this quest to payer
 	 * @param player - player which quest history need to be shown to himself
 	 */
 	private void dumpQuest(final StringBuilder sb, final IQuest quest, final Player player) {
@@ -387,7 +435,7 @@ public class StendhalQuestSystem {
 	/**
 	 * creates a report on a specified quest for a specified player
 	 *
-	 * @param player Player
+	 * @param player    Player
 	 * @param questName name of quest
 	 * @return quest report
 	 */
@@ -402,7 +450,8 @@ public class StendhalQuestSystem {
 	}
 
 	/**
-	 * dumps the internal quest states for the specified player. This is used for the InspectAction.
+	 * dumps the internal quest states for the specified player. This is used for
+	 * the InspectAction.
 	 *
 	 * @param player Player to create the report for
 	 * @return report
@@ -415,7 +464,8 @@ public class StendhalQuestSystem {
 
 		for (final IQuest quest : quests) {
 			if (quest.isStarted(player) && !quest.isCompleted(player)) {
-				sb.append("\r\n" + quest.getName() + " (" + quest.getSlotName() + "): " + player.getQuest(quest.getSlotName()));
+				sb.append("\r\n" + quest.getName() + " (" + quest.getSlotName() + "): "
+						+ player.getQuest(quest.getSlotName()));
 			}
 		}
 
@@ -423,7 +473,8 @@ public class StendhalQuestSystem {
 		sb.append("\n#'Completed Quests': ");
 		for (final IQuest quest : quests) {
 			if (quest.isCompleted(player)) {
-				sb.append("\r\n" + quest.getName() + " (" + quest.getSlotName() + "): " + player.getQuest(quest.getSlotName()));
+				sb.append("\r\n" + quest.getName() + " (" + quest.getSlotName() + "): "
+						+ player.getQuest(quest.getSlotName()));
 			}
 		}
 
@@ -497,7 +548,7 @@ public class StendhalQuestSystem {
 	/**
 	 * gets the description of a quest
 	 *
-	 * @param player player to get the details for
+	 * @param player    player to get the details for
 	 * @param questName name of quest
 	 * @return description
 	 */
@@ -515,8 +566,8 @@ public class StendhalQuestSystem {
 	 * If the quest is too dangerous, add a warning unless the player has
 	 * already completed it.
 	 *
-	 * @param player Player to get the warning for
-	 * @param questName   quest
+	 * @param player    Player to get the warning for
+	 * @param questName quest
 	 * @return warning or empty string
 	 */
 	public String getQuestLevelWarning(Player player, String questName) {
@@ -530,10 +581,11 @@ public class StendhalQuestSystem {
 		}
 		return "";
 	}
+
 	/**
 	 * gets details on the progress of the quest
 	 *
-	 * @param player player to get the details for
+	 * @param player    player to get the details for
 	 * @param questName name of quest
 	 * @return details
 	 */
@@ -550,7 +602,6 @@ public class StendhalQuestSystem {
 		}
 		return res;
 	}
-
 
 	/**
 	 * gets the IQuest object for a named quest.
@@ -572,9 +623,9 @@ public class StendhalQuestSystem {
 	 * gets the IQuest object for a quest.
 	 *
 	 * @param questSlot
-	 * 		Slot name used for quest.
+	 *                  Slot name used for quest.
 	 * @return
-	 * 		IQuest or <code>null</code> if it does not exist.
+	 *         IQuest or <code>null</code> if it does not exist.
 	 */
 	public IQuest getQuestFromSlot(final String questSlot) {
 		for (final IQuest quest : quests) {
@@ -588,16 +639,19 @@ public class StendhalQuestSystem {
 
 	/**
 	 * Unloads a quest and removes the things related to it from world.
-	 * <p>Note: The quest in question has to support this</p>
+	 * <p>
+	 * Note: The quest in question has to support this
+	 * </p>
 	 *
 	 * @param quest
-	 *     Quest instance.
+	 *              Quest instance.
 	 * @return
-	 *     <code>true</code> if quest was unloaded.
+	 *         <code>true</code> if quest was unloaded.
 	 */
 	public boolean unloadQuest(final IQuest quest) {
 		logger.info("Unloading Quest: " + quest.getName());
-		// remove from loaded list before calling removeFromWorld to prevent redundancies
+		// remove from loaded list before calling removeFromWorld to prevent
+		// redundancies
 		quests.remove(quest);
 		if (quest.removeFromWorld()) {
 			return true;
@@ -611,12 +665,14 @@ public class StendhalQuestSystem {
 
 	/**
 	 * Unloads a quest and removes the things related to it from world.
-	 * <p>Note: The quest in question has to support this</p>
+	 * <p>
+	 * Note: The quest in question has to support this
+	 * </p>
 	 *
 	 * @param questName
-	 *     Name of quest to unload.
+	 *                  Name of quest to unload.
 	 * @return
-	 *     <code>true</code> if quest was unloaded.
+	 *         <code>true</code> if quest was unloaded.
 	 */
 	public boolean unloadQuest(String questName) {
 		final IQuest quest = getQuest(questName);
@@ -632,7 +688,7 @@ public class StendhalQuestSystem {
 	 */
 	private List<IQuest> _getAllBySlot(final String slot) {
 		final List<IQuest> qfound = new ArrayList<>();
-		for (final IQuest q: quests) {
+		for (final IQuest q : quests) {
 			if (q.getSlotName().equals(slot)) {
 				qfound.add(q);
 			}
@@ -642,12 +698,14 @@ public class StendhalQuestSystem {
 
 	/**
 	 * Unloads a quest and removes the things related to it from world.
-	 * <p>Note: The quest in question has to support this</p>
+	 * <p>
+	 * Note: The quest in question has to support this
+	 * </p>
 	 *
 	 * @param slot
-	 *     Quest slot identifier.
+	 *             Quest slot identifier.
 	 * @return
-	 *     <code>true</code> if quest was unloaded.
+	 *         <code>true</code> if quest was unloaded.
 	 */
 	public boolean unloadQuestSlot(final String slot) {
 		final List<IQuest> qfound = _getAllBySlot(slot);
@@ -660,7 +718,7 @@ public class StendhalQuestSystem {
 			logger.warn("Multiple instances of " + slot + " were loaded");
 		}
 		boolean unloaded = true;
-		for (final IQuest q: qfound) {
+		for (final IQuest q : qfound) {
 			unloaded = unloaded && unloadQuest(q);
 		}
 		return unloaded;
@@ -683,20 +741,21 @@ public class StendhalQuestSystem {
 		return res;
 	}
 
-
-
 	/**
-	 * gets a list of the unique npc names for unstarted quests in a specified region
+	 * gets a list of the unique npc names for unstarted quests in a specified
+	 * region
 	 *
 	 * @param player Player to return the list for
 	 * @param region Region to check in
-	 * @return list of the unique npc names for unstarted quests in a specified region
+	 * @return list of the unique npc names for unstarted quests in a specified
+	 *         region
 	 */
 	public List<String> getNPCNamesForUnstartedQuestsInRegionForLevel(Player player, String region) {
-        final int playerlevel = player.getLevel();
+		final int playerlevel = player.getLevel();
 		List<String> res = new LinkedList<String>();
 		for (final IQuest quest : quests) {
-			if (region.equals(quest.getRegion()) && !quest.isStarted(player) && quest.isVisibleOnQuestStatus() && quest.getMinLevel()<playerlevel) {
+			if (region.equals(quest.getRegion()) && !quest.isStarted(player) && quest.isVisibleOnQuestStatus()
+					&& quest.getMinLevel() < playerlevel) {
 				// don't add a name twice
 				if (!res.contains(quest.getNPCName())) {
 					res.add(quest.getNPCName());
@@ -706,24 +765,25 @@ public class StendhalQuestSystem {
 		return res;
 	}
 
-
 	/**
 	 * Gets quest descriptions for unstarted quests in a specified region
 	 * matching a specific npc name.
 	 *
 	 * @param player Player to return the list for
 	 * @param region Region to check in
-	 * @param name npc name
+	 * @param name   npc name
 	 * @return quest description (there may be more than one)
 	 */
-	public List<String> getQuestDescriptionForUnstartedQuestInRegionFromNPCName(Player player, String region, String name) {
+	public List<String> getQuestDescriptionForUnstartedQuestInRegionFromNPCName(Player player, String region,
+			String name) {
 		List<String> res = new LinkedList<String>();
-        if (name == null) {
-            return res;
-        }
-        final int playerlevel = player.getLevel();
+		if (name == null) {
+			return res;
+		}
+		final int playerlevel = player.getLevel();
 		for (final IQuest quest : quests) {
-			if (region.equals(quest.getRegion()) && !quest.isStarted(player) && quest.isVisibleOnQuestStatus() && quest.getMinLevel()<playerlevel && name.equals(quest.getNPCName())) {
+			if (region.equals(quest.getRegion()) && !quest.isStarted(player) && quest.isVisibleOnQuestStatus()
+					&& quest.getMinLevel() < playerlevel && name.equals(quest.getNPCName())) {
 				res.add(quest.getQuestInfo(player).getDescription());
 			}
 		}
@@ -734,12 +794,12 @@ public class StendhalQuestSystem {
 	 * Checks if a quest instance has been added to the world.
 	 *
 	 * @param quest
-	 *     <code>IQuest</code> instance to be checked.
+	 *              <code>IQuest</code> instance to be checked.
 	 * @return
-	 *     <code>true</code> if the instance matches stored quests.
+	 *         <code>true</code> if the instance matches stored quests.
 	 */
 	public boolean isLoaded(final IQuest quest) {
-		for (final IQuest loaded: quests) {
+		for (final IQuest loaded : quests) {
 			if (loaded.equals(quest)) {
 				return true;
 			}
@@ -751,12 +811,12 @@ public class StendhalQuestSystem {
 	 * Checks if a quest has been added to the world.
 	 *
 	 * @param slot
-	 *     Quest slot identifier.
+	 *             Quest slot identifier.
 	 * @return
-	 *     <code>true</code> if quest slot matches stored quests.
+	 *         <code>true</code> if quest slot matches stored quests.
 	 */
 	public boolean isLoadedSlot(final String slot) {
-		for (final IQuest loaded: quests) {
+		for (final IQuest loaded : quests) {
 			if (loaded.getSlotName().equals(slot)) {
 				return true;
 			}
@@ -769,7 +829,7 @@ public class StendhalQuestSystem {
 	 */
 	public List<String> getLoadedSlots() {
 		final List<String> slots = new ArrayList<>();
-		for (final IQuest q: quests) {
+		for (final IQuest q : quests) {
 			slots.add(q.getSlotName());
 		}
 		return slots;
